@@ -19,7 +19,7 @@ Primjer migracije:
       end
     end
 
-Primjer migracije gdje eksplicitno navodi ponasanje u slucaju primjene ove migracije i njenog povlacenja (`rollback`).
+Primjer migracije gdje se eksplicitno navodi ponasanje u slucaju primjene ove migracije i njenog povlacenja (`rollback`).
 
       
     class ChangeProductsPrice < ActiveRecord::Migration
@@ -329,13 +329,17 @@ Brisanje baze, njenovo ponovno kreiranje i ucitavanje seme u bazu se postize sle
 
 - Ako je migracija vec izvrsena sama promjena migracije nema efekta. Neophodno je prethodno izvrsiti ponistavanje migracije.
 
-- Ako je migracija javno objavljena u repositor-umu nikakve direktne promjene na migraciji se ne preporucuju. Pravilna procedura ukljucuje kreiranje nove migracije koja ponistava efekte prethodne u slucaju da je to neophodno.
+- Ako je migracija javno objavljena u repositorijumu nikakve direktne promjene na migraciji se ne preporucuju. Pravilna procedura ukljucuje kreiranje nove migracije koja ponistava efekte prethodne u slucaju da je to neophodno.
 
 
 ### 7 Sema baze podataka
 
 Preporucen nacin za aktiviranje nove aplikacije nije izvrsavanje svih migracija od prve do poslednje. Preporucen nacin (koji je ujedno i brzi i jednostavniji) je ucitavanje trenutne seme u bazu podataka. Ovaj pristup se primjenjuje u pozadini pri kreiranju testne baze podataka na osnovu seme definisane u db/schema.rb ili db/structure.sql 
 
+Za kreiranje baze i ucitavanje seme na serveru u produkciji moze se koristiti sledeca komanda:
+
+    RAILS_ENV=production rake db:create db:schema:load
+    
 U Rails aplikaciji moguce je podesiti tip seme baze podataka
 
 U config/application.rb izvrsiti editovanje sljedeceg podesavanja:
@@ -351,6 +355,4 @@ ili
 
 Pristup koji ActiveRecord zagovara je da sva logika povezana sa modelima treba da bude zajedno sa modelima a ne u bazi. Samim tim mehanizmi kao sto su trigger ili restrikcije na stranim kljucevima koje smjestaju tu logiku u bazu podataka nisu cesto korisceni.
 
-Validacije i :dependent opcije su mehanizmi pomocu kojih modeli omogucavaju integritet podataka. Medjutim kako ovi mehanizmi su na aplikacionom nivou oni ne mogu u potpunosti garantovati referencijalni integritet i zato u odredjenim slucajevima je neophodno generisati dodatna pravila i restrikcije u bazi (npr. restrikcije stranog kljuca).
-
-
+Validacije i :dependent opcije su mehanizmi pomocu kojih modeli omogucavaju integritet podataka. Medjutim kako ovi mehanizmi funkcionisu na aplikacionom nivou oni ne mogu u potpunosti garantovati referencijalni integritet i zato u odredjenim slucajevima je neophodno generisati dodatna pravila i restrikcije u bazi (npr. restrikcije stranog kljuca).
