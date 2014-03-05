@@ -353,19 +353,19 @@ end</code></pre>
 
 Kada koristimo <code>magazine_ad_path</code>, tada možemo predati instancu od Magazine i Ad umjesto numeričkog ID-ja:
 
-<pre><code><%= link_to 'Ad details', magazine_ad_path(@magazine, @ad) %></code></pre>
+    <%= link_to 'Ad details', magazine_ad_path(@magazine, @ad) %>
 
 Možemo koristiti <code>url_for</code> sa skupom objekata i Rails će automatski odrediti koju rutu želite:
 
-<pre><code><%= link_to 'Ad details', url_for([@magazine, @ad]) %></code></pre>
+    <%= link_to 'Ad details', url_for([@magazine, @ad]) %>
 
 U ovom slučaju Rails će vidjeti da je <code>@magazines</code> instanca od Magazine i <code>@ad</code> instanca od Ad i zbog toga koristiti <code>magazine_ad_path</code> helper. U helperima kao <code>link_to</code>, možemo samo navesti objekat umjesto poziva <code>url_for</code>:
 
-<pre><code><%= link_to 'Ad details', [@magazine, @ad] %></code></pre>
+    <%= link_to 'Ad details', [@magazine, @ad] %>
 
 Za druge akcije, potrebno je dodati ime akcije kao prvi element niza:
 
-<pre><code><%= link_to 'Edit Ad', [:edit, @magazine, @ad] %></code></pre>
+    <%= link_to 'Edit Ad', [:edit, @magazine, @ad] %>
 
 Ovo omogućava tretiranje instaci modela kao URL adresa i ključna je prednost korićenja ovakvog stila.
 
