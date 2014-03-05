@@ -1,7 +1,7 @@
 # Layouts and Rendering in Rails
 
 ## 1 Model-View-Controller trougao
-![Model-View-Controller](/home/ivana/Pictures/MCV.jpg "MCV")
+![Model-View-Controller](MCV.jpg "MCV")
 
 ## 2 Kreiranje odgovora
 
